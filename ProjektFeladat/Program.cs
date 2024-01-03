@@ -2,6 +2,7 @@
 // usage: booksearcher.exe [file] [query]
 using ProjektFeladat;
 using Spectre.Console;
+using System.Diagnostics;
 using YamlDotNet.Serialization;
 StreamReader file; // fájl arg
 
@@ -25,7 +26,9 @@ foreach (var item in deserializedBook.books)
     Books.Add(item);
 }
 
-AnsiConsole.MarkupLine("[bold yellow]Welcome![/]\n[blue]Leave the prompt empty to list all books.[/]\n[red]Press CTRL+C to exit[/]");
+AnsiConsole.MarkupLine("[bold yellow]Welcome![/]\n\n[red]Press CTRL+C to exit[/]");
+AnsiConsole.Markup("[blue]Leave the prompt empty to list all books.[/]");
+AnsiConsole.MarkupLine("[red]Press CTRL+C to exit[/]");
 
 // main loop
 while (true)
