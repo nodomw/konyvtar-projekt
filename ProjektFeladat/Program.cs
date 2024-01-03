@@ -13,7 +13,7 @@ try
 }
 catch (Exception e)
 {
-    throw e;
+    throw new Exception("HASZNÁLAT: konyvek [fájl]", e);
 }
 // YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
 var deserializer = new DeserializerBuilder().Build();
@@ -26,7 +26,7 @@ foreach (var item in deserializedBook.books)
     Books.Add(item);
 }
 
-AnsiConsole.MarkupLine("[bold yellow]Welcome![/]\n\n[red]Press CTRL+C to exit[/]");
+AnsiConsole.MarkupLine("[bold yellow]Welcome![/]");
 AnsiConsole.Markup("[blue]Leave the prompt empty to list all books.[/]");
 AnsiConsole.MarkupLine("[red]Press CTRL+C to exit[/]");
 
