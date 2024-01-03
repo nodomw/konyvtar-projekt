@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProjektFeladat": {
+      "commandName": "Project",
+      "commandLineArgs": "konyvek.yaml"
+    }
+  }
+}
