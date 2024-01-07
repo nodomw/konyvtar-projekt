@@ -17,7 +17,8 @@ namespace ProjektFeladat
         Search,
         Add,
         Remove,
-        Exit
+        Exit,
+        Save
     };
     internal class Command
     {
@@ -25,10 +26,11 @@ namespace ProjektFeladat
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
 
-            if (command[0] == 'q') return Commands.Search; // 'q' to Search
-            else if (command[0] == 'a') return Commands.Add; // 'a' to Add
-            else if (command[0] == 'r') return Commands.Remove; // 'r' to Remove
+            if (command == "q") return Commands.Search; // 'q' to Search
+            else if (command == "a") return Commands.Add; // 'a' to Add
+            else if (command == "r") return Commands.Remove; // 'r' to Remove
             else if (command == "exit") return Commands.Exit;
+            else if (command == "save") return Commands.Save;
             else return Commands.None; // return not implemented
         }
         internal void Search(string query, List<Konyv> Books)

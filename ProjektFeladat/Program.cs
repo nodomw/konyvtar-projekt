@@ -10,7 +10,7 @@ List<Konyv> Books = new KonyvReader().LoadBooks(args[0]);
 
 void Run(string command)
 {
-    string[] splits = command.ToLower().Split(' ');
+    String[] splits = command.Split(' ');
     Command cmd = new();
     Commands type = cmd.ConvertCmd(splits[0]);
 
@@ -20,13 +20,15 @@ void Run(string command)
             AnsiConsole.MarkupLine("[bold red] not implemented![/]");
             break;
         case Commands.Search:
-            cm.Search(splits[1], Books); 
-            Console.WriteLine("")
+            String query = AnsiConsole.Prompt(new TextPrompt<String>("[bold]enter query: [/]").AllowEmpty());
+            cm.Search(query, Books);
             break;
         case Commands.Add:
-            break;
+            break; // TODO
         case Commands.Remove:
-            break;
+            break; // TODO
+        case Commands.Save:
+            break; // TODO
         case Commands.Exit:
             Environment.Exit(0);
             break;
