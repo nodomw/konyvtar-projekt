@@ -23,12 +23,15 @@ void Run(string command)
             String query = AnsiConsole.Prompt(new TextPrompt<String>("[bold]enter query: [/]").AllowEmpty());
             cm.Search(query, Books);
             break;
-        case Commands.Add:
-            break; // TODO
-        case Commands.Remove:
-            break; // TODO
-        case Commands.Save:
-            break; // TODO
+        case Commands.Add: // TODO
+            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
+            break;
+        case Commands.Remove: // TODO
+            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
+            break;
+        case Commands.Save: // TODO
+            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
+            break;
         case Commands.Exit:
             Environment.Exit(0);
             break;
