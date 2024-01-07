@@ -29,6 +29,9 @@ foreach (var item in deserializedBook.books)
 AnsiConsole.MarkupLine("[bold yellow]Welcome![/]");
 AnsiConsole.Markup("[blue]Leave the prompt empty to list all books.[/]");
 AnsiConsole.MarkupLine("[red]Press CTRL+C to exit[/]");
+Console.WriteLine("type 'q [query]' to search");
+Console.WriteLine("type 'a [book_title] [book_author] [book_genre] [book_url]' to add a book.");
+Console.WriteLine("type 'r [query]' to delete a book.");
 
 // main loop
 while (true)
@@ -43,7 +46,8 @@ while (true)
     table.AddColumn("URL");
     table.Border(TableBorder.Rounded);
 
-    string search = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter search term: [/]").AllowEmpty()); // keresés
+    string input = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]").AllowEmpty());
+    string search;
 
     for (int i = 0; i < Books.Count; i++)
     {
