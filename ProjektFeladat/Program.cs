@@ -1,29 +1,28 @@
-﻿// See https://aka.ms/new-console-template for more information
-// usage: booksearcher.exe [file] [query]
-using ProjektFeladat;
+﻿using ProjektFeladat;
 using Spectre.Console;
+using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
-StreamReader file; // fájl arg
 
-// fájlbeolvasós try-catch
-try
+Command cm = new Command();
+List<Konyv> Books = new KonyvReader().LoadBooks(args[0]);
+void Run(string command)
 {
-    file = new(args[0]);
-}
-catch (Exception e)
-{
-    throw new Exception("HASZNÁLAT: konyvek [fájl]", e);
-}
-// YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
-var deserializer = new DeserializerBuilder().Build();
-var deserializedBook = deserializer.Deserialize<Konyvek>(file.ReadToEnd()); // kiolvasott adatok átírása 'Konyvek' osztályba
+    Command cmd = new();
+    Commands type = cmd.ConvertCmd(command);
 
-// Összes könyv adatának átírása listába
-List<Konyv> Books = new();
-foreach (var item in deserializedBook.books)
-{
-    Books.Add(item);
+    switch (type)
+    {
+        case Commands.None:
+            throw new NotImplementedException("not implemented");
+        case Commands.Search:
+            break;
+        case Commands.Add:
+            break;
+        case Commands.Remove:
+            break;
+    }
 }
 
 AnsiConsole.MarkupLine("[bold yellow]Welcome![/]");
@@ -36,29 +35,7 @@ Console.WriteLine("type 'r [query]' to delete a book.");
 // main loop
 while (true)
 {
-    // tábla GUI előkészítése
-    var table = new Table();
+    string search = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]").AllowEmpty());
 
-    table.AddColumn("Title");
-    table.AddColumn("Year");
-    table.AddColumn("Author");
-    table.AddColumn("Genre");
-    table.AddColumn("URL");
-    table.Border(TableBorder.Rounded);
-
-    string input = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]").AllowEmpty());
-    string search;
-
-    for (int i = 0; i < Books.Count; i++)
-    {
-        if (Books[i].title.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0) // indexes keresés a 'search' változó alapján, nagybetűket ignorálva. a keresés csak a cím alapján működik.
-        {
-            var konyv = Books[i]; // Jelenlegi könyv változó
-
-            // egy sor hozzáadása az i-edik könyvvel
-            table.AddRow(konyv.title, konyv.year.ToString(), konyv.author, konyv.genre, $"[blue underline]{konyv.url}[/]");
-        }
-    }
-    
-    AnsiConsole.Write(table); // tábla kiírása
+    cm.Search(search, Books);
 }

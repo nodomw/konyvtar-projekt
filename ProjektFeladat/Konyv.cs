@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 
 namespace ProjektFeladat
 {
@@ -21,4 +22,34 @@ namespace ProjektFeladat
     {
         public List<Konyv> books { get; set; } // List<Konyv>-et nem engedte a deszerializálásnál, ezért kellett ez.
     }
+    internal class KonyvReader
+    {
+        internal List<Konyv> LoadBooks(string path)
+        {
+            StreamReader file;
+
+            // fájlbeolvasós try-catch
+            try
+            {
+                file = new(path);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("konyvek [file]", e);
+            }
+            // YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
+            var deserializer = new DeserializerBuilder().Build();
+            var deserializedBook = deserializer.Deserialize<Konyvek>(file.ReadToEnd()); // kiolvasott adatok átírása 'Konyvek' osztályba
+
+            // Összes könyv adatának átírása listába
+            List<Konyv> Books = new();
+            foreach (var item in deserializedBook.books)
+            {
+                Books.Add(item);
+            }
+
+            return Books;
+        }
+    }
+
 }

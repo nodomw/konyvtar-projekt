@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -19,18 +20,42 @@ namespace ProjektFeladat
     };
     internal class Command
     {
-        internal Commands ConvertCmd(string command)
+        internal Commands ConvertCmd(string command) // does not run the commands but converts them to be able to be used in a switch statement
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
 
-            if (command[1] == 'q') return Commands.Search; // 'q' to Search
-            else if (command[1] == 'a') return Commands.Add; // 'a' to Add
-            else if (command[1] == 'r') return Commands.Remove; // 'r' to Remove
-            else return Commands.None; // None to anything else.
+            if (command[0..1] == "q ") return Commands.Search; // 'q' to Search
+            else if (command[0..1] == "a ") return Commands.Add; // 'a' to Add
+            else if (command[0..1] == "r ") return Commands.Remove; // 'r' to Remove
+            else return Commands.None; // return not implemented
         }
-        internal void Search(Konyvek books) { }
-        internal void Remove(Konyv book) { }
-        internal void Add(Konyv book) { }
-        internal void Save() { }
+        internal void Search(string query, List<Konyv> Books) // TODO
+        {
+            // tábla GUI előkészítése
+            var table = new Table();
+
+            table.AddColumn("Title");
+            table.AddColumn("Year");
+            table.AddColumn("Author");
+            table.AddColumn("Genre");
+            table.AddColumn("URL");
+            table.Border(TableBorder.Rounded);
+
+            for (int i = 0; i < Books.Count; i++)
+            {
+                if (Books[i].title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0) // indexes keresés a 'search' változó alapján, nagybetűket ignorálva. a keresés csak a cím alapján működik.
+                {
+                    var konyv = Books[i]; // Jelenlegi könyv változó
+
+                    // egy sor hozzáadása az i-edik könyvvel
+                    table.AddRow(konyv.title, konyv.year.ToString(), konyv.author, konyv.genre, $"[blue underline]{konyv.url}[/]");
+                }
+            }
+
+            AnsiConsole.Write(table); // tábla kiírása
+        }
+        internal void Remove(Konyv book) { } // TODO
+        internal void Add(Konyv book) { } // TODO
+        internal void Save() { } // TODO
     }
 }
