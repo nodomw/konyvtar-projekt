@@ -3,57 +3,70 @@ books:
     author: "Imre Madách"
     genre: "Drama"
     year: 1861
+    url: https://something.t
 
   - title: "A Pál utcai fiúk"
     author: "Ferenc Molnár"
     genre: "Coming-of-age"
     year: 1907
+    url: https://something.t
 
   - title: "Tüskevár"
     author: "Géza Gárdonyi"
     genre: "Adventure"
     year: 1957
+    url: https://something.t
 
   - title: "Egri csillagok"
     author: "Géza Gárdonyi"
     genre: "Historical fiction"
     year: 1899
+    url: https://something.t
 
   - title: "Az arany ember"
     author: "Mór Jókai"
     genre: "Adventure"
     year: 1872
+    url: https://something.t
 
   - title: "A kőszívű ember fiai"
     author: "Mór Jókai"
     genre: "Historical novel"
     year: 1869
+    url: https://something.t
+
   - title: "Az élet és a halál meghatározatlan ideje"
     author: "Imre Kertész"
     genre: "Philosophical novel"
     year: 2004
+    url: https://something.t
 
   - title: "A Pesti Ház"
     author: "Sándor Mórai"
     genre: "Historical novel"
     year: 1939
+    url: https://something.t
 
   - title: "Külvárosi legenda"
     author: "Dezső Kosztolányi"
     genre: "Novel"
     year: 1922
+    url: https://something.t
 
   - title: "A napló"
     author: "János Háy"
     genre: "Contemporary fiction"
     year: 2015
+    url: https://something.t
 
   - title: "Az ötödik pecsét"
     author: "Zoltán Fábri"
     genre: "Historical drama"
     year: 1976
+    url: https://something.t
 
   - title: "A fehér király"
     author: "György Dragomán"
     genre: "Coming-of-age"
     year: 2005
+    url: https://something.t

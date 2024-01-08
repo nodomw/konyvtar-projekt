@@ -61,18 +61,6 @@ namespace ProjektFeladat
 
             AnsiConsole.Write(table); // tábla kiírása
         }
-        internal void Remove(Konyv book)
-        {
-            // TODO
-        }
-        internal void Add(Konyv book)
-        {
-            // TODO
-        }
-        internal void Save()
-        {
-            // TODO
-        }
         internal string Help(Commands command)
         {
 
