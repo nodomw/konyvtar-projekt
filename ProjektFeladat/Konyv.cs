@@ -9,18 +9,18 @@ namespace ProjektFeladat
 {
     internal class Konyv // Könyv osztály
     {
-        public string Title { get; set; } // Cím
-        public string Author { get; set; } // Szerző
+        public string title { get; set; } // Cím
+        public string author { get; set; } // Szerző
 
-        public string Genre { get; set; } // Műfaj
+        public string genre { get; set; } // Műfaj
 
-        public int Year { get; set; } // Kiadás éve
+        public int year { get; set; } // Kiadás éve
         
-        public string Url { get; set; } // Elérhetési URL
+        public string url { get; set; } // Elérhetési URL
     }
     internal class Konyvek
     {
-        public List<Konyv> Books { get; set; } // List<Konyv>-et nem engedte a deszerializálásnál, ezért kellett ez.
+        public List<Konyv> books { get; set; } // List<Konyv>-et nem engedte a deszerializálásnál, ezért kellett ez.
     }
     internal class KonyvReader
     {
@@ -37,13 +37,14 @@ namespace ProjektFeladat
             {
                 throw new Exception("konyvek [file]", e);
             }
+            
             // YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
             var Deserializer = new DeserializerBuilder().Build();
             var DeserializedBook = Deserializer.Deserialize<Konyvek>(File.ReadToEnd()); // kiolvasott adatok átírása 'Konyvek' osztályba
 
             // Összes könyv adatának átírása listába
             List<Konyv> Books = new();
-            foreach (var Item in DeserializedBook.Books)
+            foreach (var Item in DeserializedBook.books)
             {
                 Books.Add(Item);
             }

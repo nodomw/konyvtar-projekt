@@ -37,26 +37,26 @@ namespace ProjektFeladat
         }
         internal void Search(string query, List<Konyv> Books)
         {
-            var Table = new Table();
+            var table = new Table();
 
-            Table.AddColumn("Title");
-            Table.AddColumn("Year");
-            Table.AddColumn("Author");
-            Table.AddColumn("Genre");
-            Table.AddColumn("URL");
-            Table.Border(TableBorder.Rounded);
+            table.AddColumn("Title");
+            table.AddColumn("Year");
+            table.AddColumn("Author");
+            table.AddColumn("Genre");
+            table.AddColumn("URL");
+            table.Border(TableBorder.Rounded);
 
             for (int i = 0; i < Books.Count; i++)
             {
-                if (Books[i].Title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0) // indexes keresés a 'search' változó alapján, nagybetűket ignorálva. a keresés csak a cím alapján működik.
+                if (Books[i].title.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0) // indexes keresés a 'search' változó alapján, nagybetűket ignorálva. a keresés csak a cím alapján működik.
                 {
                     var Book = Books[i];
 
-                    Table.AddRow(Book.Title, Book.Year.ToString(), Book.Author, Book.Genre, $"[blue underline]{Book.Url}[/]");
+                    table.AddRow(Book.title, Book.year.ToString(), Book.author, Book.genre, $"[blue underline]{Book.url}[/]");
                 }
             }
 
-            AnsiConsole.Write(Table); // tábla kiírása
+            AnsiConsole.Write(table); // tábla kiírása
         }
         internal string Help(Command command) // Súgó
         {
