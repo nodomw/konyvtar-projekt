@@ -13,25 +13,28 @@ namespace ProjektFeladat
 {
     internal enum Commands
     {
-        None,
         Search,
         Add,
         Remove,
         Exit,
-        Save
+        Save,
+        Help,
+        Unknown
     };
     internal class Command
     {
         internal Commands ConvertCmd(string command) // does not run the commands but converts them to be able to be used in a switch statement
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
-
-            if (command == "q") return Commands.Search; // 'q' to Search
-            else if (command == "a") return Commands.Add; // 'a' to Add
-            else if (command == "r") return Commands.Remove; // 'r' to Remove
+            // i know hard coded aliases suck but it is whaht it is
+            if (command == "q" || command == "search") return Commands.Search;
+            else if (command == "a" || command == "add") return Commands.Add;
+            else if (command == "r" || command == "remove") return Commands.Remove;
             else if (command == "exit") return Commands.Exit;
             else if (command == "save") return Commands.Save;
-            else return Commands.None; // return not implemented
+            else if (command == "help") return Commands.Help;
+            else return Commands.Unknown;
+            // else return Commands.Exit; // return not implemented
         }
         internal void Search(string query, List<Konyv> Books)
         {
@@ -69,6 +72,29 @@ namespace ProjektFeladat
         internal void Save()
         {
             // TODO
+        }
+        internal string Help(Commands command)
+        {
+
+            switch (command)
+            {
+                case Commands.Search:
+                    return @"HELP: Querying elements";
+                case Commands.Add:
+                    return @"HELP: Adding elements";
+                case Commands.Remove:
+                    return @"HELP: Removing elements";
+                case Commands.Exit:
+                    return @"HELP: Exit";
+                case Commands.Save:
+                    return @"HELP: Save";
+                case Commands.Help:
+                    return @"HELP: Help";
+                case Commands.Unknown:
+                    goto default;
+                default:
+                    return @"HELP: ";
+            }
         }
     }
 }

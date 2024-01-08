@@ -27,23 +27,23 @@ while (true)
 
     switch (type)
     {
-        case Commands.None:
-            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
-            break;
         case Commands.Search:
             cm.Search(String.Join(" ", splits[1..]), Books);
             break;
         case Commands.Add: // TODO
-            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
-            break;
+            goto default;
         case Commands.Remove: // TODO
-            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
-            break;
+            goto default;
         case Commands.Save: // TODO
-            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
-            break;
+            goto default;
         case Commands.Exit:
             Environment.Exit(0);
+            break;
+        case Commands.Help:
+            Console.WriteLine(cm.Help(cm.ConvertCmd(splits[1] == null ? "" : splits[1])));
+            break;
+        default:
+            AnsiConsole.MarkupLine("[bold red] not implemented![/]");
             break;
     }
 }
