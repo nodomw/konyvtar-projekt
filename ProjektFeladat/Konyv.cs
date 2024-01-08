@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjektFeladat;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,44 +77,133 @@ namespace ProjektFeladat
     }
     internal class KonyvManager
     {
-        internal void AddBook(Konyv Book, List<Konyv> Books)
+        internal void AddBook(List<Konyv> Books, string libraryPath)
         {
-            if (Book != null)
+            Konyv newBook = new Konyv();
+
+            // Felhasználótól bekérjük a könyv adatait
+            Console.WriteLine("Könyv hozzáadása:");
+            Console.Write("Cím: ");
+            newBook.title = Console.ReadLine();
+
+            Console.Write("Szerző: ");
+            newBook.author = Console.ReadLine();
+
+            Console.Write("Műfaj: ");
+            newBook.genre = Console.ReadLine();
+
+            Console.Write("Kiadás év: ");
+            if (int.TryParse(Console.ReadLine(), out int year))
             {
-                // könyv hozzáadása a listához
-                Books.Add(Book);
-                // konzolra kiírás a sikeres könyv hozzáadásról
-                Console.WriteLine($"A könyv hozzáadva: {Book.title} - {Book.author}");
+                newBook.year = year;
             }
             else
             {
-                // hibaüzenet, ha a hozzáadandó könyv értéke null
-                Console.WriteLine("A hozzáadandó könyv értéke null.");
+                Console.WriteLine("Érvénytelen év formátum. Az év 0-ra lesz állítva.");
+                newBook.year = 0;
+            }
+
+            Console.Write("URL: ");
+            newBook.url = Console.ReadLine();
+
+            // könyv hozzáadása a listához
+            Books.Add(newBook);
+
+            // konzolra kiírás a sikeres könyv hozzáadásról
+            Console.WriteLine($"A könyv hozzáadva: {newBook.title} - {newBook.author}");
+        }
+
+        private static void UpdateLibrary(List<Konyv> Books, string libraryPath)
+        {
+            // könyvtár frissítése a szerializált listával
+            var Serializer = new SerializerBuilder().Build();
+            var SerializedBook = Serializer.Serialize(new Konyvek { books = Books });
+
+            // Fájlba írás
+            File.WriteAllText(libraryPath, SerializedBook);
+        }
+    }
+    internal void RemoveBook(Konyv Book, List<Konyv> Books, string libraryPath)
+    {
+        if (Book != null)
+        {
+            // könyv eltávolítása a listából
+            bool removed = Books.Remove(Book);
+
+            if (removed)
+            {
+                // konzolra kiírás a sikeres könyveltávolításról
+                Console.WriteLine($"A könyv eltávolítva: {Book.title} - {Book.author}");
+
+                // frissítjük a könyvtárat
+                // UpdateLibrary(Books, libraryPath);
+            }
+            else
+            {
+                // konzolra kiírás, ha a könyv nem található a listában
+                Console.WriteLine($"A könyv nem található a listában: {Book.title} - {Book.author}");
             }
         }
-        internal void RemoveBook(Konyv Book, List<Konyv> Books)
+        else
         {
-            if (Book != null)
-            {
-                // könyv eltávolítása a listából
-                var removed = Books.Remove(Book);
-                if (removed)
-                {
-                    // konzolra kiírás a sikeres könyveltávolításról
-                    Console.WriteLine($"A könyv eltávolítva: {Book.title} - {Book.author}");
-                }
-                else
-                {
-                    // konzolra kiírás, ha a könyv nem található a listában
-                    Console.WriteLine($"A könyv nem található a listában: {Book.title} - {Book.author}");
-                }
-            }
-            else
-            {
-                // hibaüzenet, ha a törlendő könyv értéke null
-                Console.WriteLine("A törlendő könyv értéke null.");
-            }
+            // hibaüzenet, ha a törlendő könyv értéke null
+            Console.WriteLine("A törlendő könyv értéke null.");
         }
     }
 
+    private void UpdateLibrary(List<Konyv> Books, string libraryPath)
+    {
+        // könyvtár frissítése a szerializált listával
+        var Serializer = new SerializerBuilder().Build();
+        var SerializedBook = Serializer.Serialize(new Konyvek { books = Books });
+
+        // Fájlba írás
+        File.WriteAllText(libraryPath, SerializedBook);
+    }
 }
+
+
+
+
+// egy előző "működő" ideiglenes vezió -TÖRÖLD KI!-
+// internal class KonyvManager
+//{
+    //internal void AddBook(Konyv Book, List<Konyv> Books)
+    //{
+        //if (Book != null)
+        //{
+            // könyv hozzáadása a listához
+            //Books.Add(Book);
+            // konzolra kiírás a sikeres könyv hozzáadásról
+            //Console.WriteLine($"A könyv hozzáadva: {Book.title} - {Book.author}");
+        //}
+        //else
+        //{
+            // hibaüzenet, ha a hozzáadandó könyv értéke null
+            //Console.WriteLine("A hozzáadandó könyv értéke null.");
+        //}
+    //}
+    //internal void RemoveBook(Konyv Book, List<Konyv> Books)
+    //{
+        //if (Book != null)
+        //{
+            // könyv eltávolítása a listából
+            //var removed = Books.Remove(Book);
+            //if (removed)
+            //{
+                // konzolra kiírás a sikeres könyveltávolításról
+                //Console.WriteLine($"A könyv eltávolítva: {Book.title} - {Book.author}");
+            //}
+            //else
+            //{
+                // konzolra kiírás, ha a könyv nem található a listában
+                //Console.WriteLine($"A könyv nem található a listában: {Book.title} - {Book.author}");
+            //}
+        //}
+        //else
+        //{
+            // hibaüzenet, ha a törlendő könyv értéke null
+            //Console.WriteLine("A törlendő könyv értéke null.");
+        //}
+    //}
+//}
