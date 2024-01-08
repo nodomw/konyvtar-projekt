@@ -78,7 +78,7 @@ namespace ProjektFeladat
         {
             if (Book != null)
             {
-                Book.Add(Book);
+                Books.Add(Book);
                 Console.WriteLine($"A könyv hozzáadva: {Book.Title} - {Book.Author}");
             }
             else
