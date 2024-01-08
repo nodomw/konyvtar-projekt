@@ -9,43 +9,43 @@ namespace ProjektFeladat
 {
     internal class Konyv // Könyv osztály
     {
-        public string title { get; set; } // Cím
-        public string author { get; set; } // Szerző
+        public string Title { get; set; } // Cím
+        public string Author { get; set; } // Szerző
 
-        public string genre { get; set; } // Műfaj
+        public string Genre { get; set; } // Műfaj
 
-        public int year { get; set; } // Kiadás éve
+        public int Year { get; set; } // Kiadás éve
         
-        public string url { get; set; } // Elérhetési URL
+        public string Url { get; set; } // Elérhetési URL
     }
     internal class Konyvek
     {
-        public List<Konyv> books { get; set; } // List<Konyv>-et nem engedte a deszerializálásnál, ezért kellett ez.
+        public List<Konyv> Books { get; set; } // List<Konyv>-et nem engedte a deszerializálásnál, ezért kellett ez.
     }
     internal class KonyvReader
     {
         internal List<Konyv> LoadBooks(string path)
         {
-            StreamReader file;
+            StreamReader File;
 
             // fájlbeolvasós try-catch
             try
             {
-                file = new(path);
+                File = new(path);
             }
             catch (Exception e)
             {
                 throw new Exception("konyvek [file]", e);
             }
             // YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
-            var deserializer = new DeserializerBuilder().Build();
-            var deserializedBook = deserializer.Deserialize<Konyvek>(file.ReadToEnd()); // kiolvasott adatok átírása 'Konyvek' osztályba
+            var Deserializer = new DeserializerBuilder().Build();
+            var DeserializedBook = Deserializer.Deserialize<Konyvek>(File.ReadToEnd()); // kiolvasott adatok átírása 'Konyvek' osztályba
 
             // Összes könyv adatának átírása listába
             List<Konyv> Books = new();
-            foreach (var item in deserializedBook.books)
+            foreach (var Item in DeserializedBook.Books)
             {
-                Books.Add(item);
+                Books.Add(Item);
             }
 
             return Books;
@@ -55,7 +55,7 @@ namespace ProjektFeladat
     {
         internal void SaveBooks(string path, List<Konyv> Books)
         {
-            // fájlbeolvasós try-catch
+            // fájl létrehozása - ne tudjon Exceptiont dobni nem létező fájl miatt
             try
             {
                 File.WriteAllText(path, "");
@@ -65,20 +65,20 @@ namespace ProjektFeladat
                 throw new Exception("konyvek [file]", e);
             }
             // YAML szerializáló létrehozása, és a beolvasott lista szerializálása
-            var serializer = new SerializerBuilder().Build();
-            var serializedBook = serializer.Serialize(Books);
+            var Serializer = new SerializerBuilder().Build();
+            var SerializedBook = Serializer.Serialize(Books);
 
             // fájlba írás
-            File.WriteAllText(path, serializedBook);
+            File.WriteAllText(path, SerializedBook);
         }
     }
     internal class KonyvManager
     {
-        internal void AddBook(Konyv book)
+        internal void AddBook(Konyv Book, List<Konyv> Books)
         {
             // TODO - lados vagy macza
         }
-        internal void RemoveBook(Konyv book)
+        internal void RemoveBook(Konyv Book, List<Konyv> Books)
         {
             // TODO - lados vagy macza
         }

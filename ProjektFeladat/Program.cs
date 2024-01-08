@@ -13,34 +13,33 @@ Console.WriteLine("type 'q [query]' to search");
 Console.WriteLine("type 'a [book_title] [book_author] [book_genre] [book_url]' to add a book.");
 Console.WriteLine("type 'r [query]' to delete a book.");
 
-Command cm = new Command();
 List<Konyv> Books = new KonyvReader().LoadBooks(args[0]);
 
 // main loop
 while (true)
 {
-    string command = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]"));
+    string Command = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]"));
 
-    String[] splits = command.Split(' ');
-    Command cmd = new();
-    Commands type = cmd.ConvertCmd(splits[0]);
+    String[] Splits = Command.Split(' ');
+    CommandHandler Cmd = new();
+    Command Type = Cmd.ConvertCmd(Splits[0]);
 
-    switch (type)
+    switch (Type)
     {
-        case Commands.Search:
-            cm.Search(String.Join(" ", splits[1..]), Books);
+        case ProjektFeladat.Command.Search:
+            Cmd.Search(string.Join(" ", Splits[1..]), Books);
             break;
-        case Commands.Add: // TODO
+        case ProjektFeladat.Command.Add: // TODO
             goto default;
-        case Commands.Remove: // TODO
+        case ProjektFeladat.Command.Remove: // TODO
             goto default;
-        case Commands.Save: // TODO
+        case ProjektFeladat.Command.Save: // TODO
             goto default;
-        case Commands.Exit:
+        case ProjektFeladat.Command.Exit:
             Environment.Exit(0);
             break;
-        case Commands.Help:
-            Console.WriteLine(cm.Help(cm.ConvertCmd(splits[1] == null ? "" : splits[1])));
+        case ProjektFeladat.Command.Help:
+            Console.WriteLine(Cmd.Help(Cmd.ConvertCmd(Splits[1] == null ? "" : Splits[1])));
             break;
         default:
             AnsiConsole.MarkupLine("[bold red] not implemented![/]");
