@@ -77,11 +77,41 @@ namespace ProjektFeladat
     {
         internal void AddBook(Konyv Book, List<Konyv> Books)
         {
-            // TODO - lados vagy macza
+            if (Book != null)
+            {
+                // könyv hozzáadása a listához
+                Books.Add(Book);
+                // konzolra kiírás a sikeres könyv hozzáadásról
+                Console.WriteLine($"A könyv hozzáadva: {Book.Title} - {Book.Author}");
+            }
+            else
+            {
+                // hibaüzenet, ha a hozzáadandó könyv értéke null
+                Console.WriteLine("A hozzáadandó könyv értéke null.");
+            }
         }
         internal void RemoveBook(Konyv Book, List<Konyv> Books)
         {
-            // TODO - lados vagy macza
+            if (Book != null)
+            {
+                // könyv eltávolítása a listából
+                var removed = Books.Remove(Book);
+                if (removed)
+                {
+                    // konzolra kiírás a sikeres könyveltávolításról
+                    Console.WriteLine($"A könyv eltávolítva: {Book.Title} - {Book.Author}");
+                }
+                else
+                {
+                    // konzolra kiírás, ha a könyv nem található a listában
+                    Console.WriteLine($"A könyv nem található a listában: {Book.Title} - {Book.Author}");
+                }
+            }
+            else
+            {
+                // hibaüzenet, ha a törlendő könyv értéke null
+                Console.WriteLine("A törlendő könyv értéke null.");
+            }
         }
     }
 
