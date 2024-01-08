@@ -81,6 +81,10 @@ namespace ProjektFeladat
                 book.Add(book);
                 Console.WriteLine($"A könyv hozzáadva: {book.title} - {book.author}");
             }
+            else
+            {
+                Console.WriteLine("A hozzáadandó könyv értéke null.");
+            }
         }
         internal void RemoveBook(Konyv Book, List<Konyv> Books)
         {
