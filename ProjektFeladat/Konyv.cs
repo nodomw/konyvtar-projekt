@@ -82,7 +82,7 @@ namespace ProjektFeladat
                 // könyv hozzáadása a listához
                 Books.Add(Book);
                 // konzolra kiírás a sikeres könyv hozzáadásról
-                Console.WriteLine($"A könyv hozzáadva: {Book.Title} - {Book.Author}");
+                Console.WriteLine($"A könyv hozzáadva: {Book.title} - {Book.author}");
             }
             else
             {
@@ -99,12 +99,12 @@ namespace ProjektFeladat
                 if (removed)
                 {
                     // konzolra kiírás a sikeres könyveltávolításról
-                    Console.WriteLine($"A könyv eltávolítva: {Book.Title} - {Book.Author}");
+                    Console.WriteLine($"A könyv eltávolítva: {Book.title} - {Book.author}");
                 }
                 else
                 {
                     // konzolra kiírás, ha a könyv nem található a listában
-                    Console.WriteLine($"A könyv nem található a listában: {Book.Title} - {Book.Author}");
+                    Console.WriteLine($"A könyv nem található a listában: {Book.title} - {Book.author}");
                 }
             }
             else
