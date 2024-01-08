@@ -31,8 +31,7 @@ while (true)
             AnsiConsole.MarkupLine("[bold red] not implemented![/]");
             break;
         case Commands.Search:
-            String query = AnsiConsole.Prompt(new TextPrompt<String>("[bold]enter query: [/]").AllowEmpty()); // work on this 2 make it better
-            cm.Search(query, Books);
+            cm.Search(String.Join(" ", splits[1..]), Books);
             break;
         case Commands.Add: // TODO
             AnsiConsole.MarkupLine("[bold red] not implemented![/]");
