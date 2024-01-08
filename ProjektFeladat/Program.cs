@@ -6,12 +6,8 @@ using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
 
 AnsiConsole.MarkupLine("[bold yellow]Welcome![/]");
-AnsiConsole.MarkupLine("[red]Type 'exit' to exit.[/]");
-Console.WriteLine("");
-AnsiConsole.MarkupLine("[bold white]COMMANDS:[/]");
-Console.WriteLine("type 'q [query]' to search");
-Console.WriteLine("type 'a [book_title] [book_author] [book_genre] [book_url]' to add a book.");
-Console.WriteLine("type 'r [query]' to delete a book.");
+AnsiConsole.MarkupLine("[red]type 'exit' to exit.[/]");
+AnsiConsole.MarkupLine("[bold]type 'help' for all the commands[/]");
 
 List<Konyv> Books = new KonyvReader().LoadBooks(args[0]);
 
@@ -39,7 +35,10 @@ while (true)
             Environment.Exit(0);
             break;
         case ProjektFeladat.Command.Help:
-            Console.WriteLine(Cmd.Help(Cmd.ConvertCmd(Splits[1] == null ? "" : Splits[1])));
+            if (Splits.Length >= 2 )
+            {
+                Console.WriteLine(Cmd.Help(Cmd.ConvertCmd(Splits[1])));
+            }
             break;
         default:
             AnsiConsole.MarkupLine("[bold red] not implemented![/]");
