@@ -29,11 +29,11 @@ while (true)
         case ProjektFeladat.Command.Search:
             Cmd.Search(string.Join(" ", Splits[1..]), Books);
             break;
-        case ProjektFeladat.Command.Add: // TODO
+        case ProjektFeladat.Command.Add: // TODO - Dávid
             goto default;
-        case ProjektFeladat.Command.Remove: // TODO
+        case ProjektFeladat.Command.Remove: // TODO - Dávid
             goto default;
-        case ProjektFeladat.Command.Save: // TODO
+        case ProjektFeladat.Command.Save: // TODO - Dávid
             goto default;
         case ProjektFeladat.Command.Exit:
             Environment.Exit(0);
