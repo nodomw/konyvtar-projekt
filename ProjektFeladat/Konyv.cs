@@ -76,7 +76,11 @@ namespace ProjektFeladat
     {
         internal void AddBook(Konyv Book, List<Konyv> Books)
         {
-            // TODO - lados vagy macza
+            if (book != null)
+            {
+                book.Add(book);
+                Console.WriteLine($"A könyv hozzáadva: {book.title} - {book.author}");
+            }
         }
         internal void RemoveBook(Konyv Book, List<Konyv> Books)
         {
