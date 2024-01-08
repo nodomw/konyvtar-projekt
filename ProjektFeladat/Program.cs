@@ -23,7 +23,7 @@ while (true)
     String[] Splits = Command.Split(' ');
     CommandHandler Cmd = new();
     Command Type = Cmd.ConvertCmd(Splits[0]);
-
+    
     switch (Type)
     {
         case ProjektFeladat.Command.Search:

@@ -60,7 +60,7 @@ namespace ProjektFeladat
         }
         internal string Help(Command command) // Súgó
         {
-            switch (command)
+            switch (command) // TODO - Dávid
             {
                 case Command.Search:
                     return @"HELP: Querying elements";
