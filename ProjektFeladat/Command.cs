@@ -44,7 +44,7 @@ namespace ProjektFeladat
             table.AddColumn("Author");
             table.AddColumn("Genre");
             table.AddColumn("URL");
-            table.Border(TableBorder.Rounded);
+            table.Border = TableBorder.Minimal;
 
             for (int i = 0; i < Books.Count; i++)
             {

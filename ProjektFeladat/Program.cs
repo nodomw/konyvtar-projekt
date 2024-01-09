@@ -16,10 +16,10 @@ List<Konyv> Books = kr.LoadBooks();
 while (true)
 {
     string Prompt = AnsiConsole.Prompt(new TextPrompt<string>("[bold]enter command: [/]"));
-    String[]        Splits = Prompt.Split(' ');
-    CommandHandler  Cmd = new();
-    KonyvManager    k = new();
-    Command         Type = Cmd.ConvertCmd(Splits[0]);
+    String[] Splits = Prompt.Split(' ');
+    CommandHandler Cmd = new();
+    KonyvManager k = new();
+    Command Type = Cmd.ConvertCmd(Splits[0]);
     switch (Type)
     {
         case Command.Search:
@@ -27,12 +27,12 @@ while (true)
             break;
         case Command.Add:
             if (Splits.Length <= 1) goto case Command.Help;
-            Konyv book =    new();
-            book.title =    Splits[1];
-            book.author =   Splits[2];
-            book.genre =    Splits[3];
-            book.year =     Int32.Parse(Splits[4]);
-            book.url =      Splits[5];
+            Konyv book = new();
+            book.title = Splits[1];
+            book.author = Splits[2];
+            book.genre = Splits[3];
+            book.year = Int32.Parse(Splits[4]);
+            book.url = Splits[5];
 
             k.AddBook(book, Books);
             break;
@@ -40,8 +40,8 @@ while (true)
         case Command.Remove:
             if (Splits.Length <= 1) goto case Command.Help;
 
-            string BookName =   string.Join(" ", Splits[1..]);
-            var Match =         Books.Find(new Predicate<Konyv>(book => book.title.Contains(BookName)));
+            string BookName = string.Join(" ", Splits[1..]);
+            var Match = Books.Find(new Predicate<Konyv>(book => book.title.Contains(BookName)));
 
             k.RemoveBook(Match, Books);
             break;
@@ -60,7 +60,8 @@ while (true)
             if (Splits.Length >= 2)
             {
                 AnsiConsole.MarkupLine(Cmd.Help(Cmd.ConvertCmd(Splits[1])));
-            } else
+            }
+            else
             {
                 AnsiConsole.MarkupLine(Cmd.Help(Command.Unknown));
             }

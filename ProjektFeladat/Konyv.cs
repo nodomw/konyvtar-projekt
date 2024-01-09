@@ -6,14 +6,14 @@ namespace ProjektFeladat
 {
     internal class Konyv // Könyv osztály
     {
-       /* public Konyv(string title, string author="", string genre="", int year=0, string url="")
-        {
-            this.title = title;
-            this.author = author;       
-            this.genre = genre;
-            this.year = year;   
-            this.url = url;
-        }*/
+        /* public Konyv(string title, string author="", string genre="", int year=0, string url="")
+         {
+             this.title = title;
+             this.author = author;       
+             this.genre = genre;
+             this.year = year;   
+             this.url = url;
+         }*/
         public string title { get; set; } // Cím
         public string author { get; set; } // Szerző
 
