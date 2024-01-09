@@ -60,24 +60,47 @@ namespace ProjektFeladat
         }
         internal string Help(Command command) // Súgó
         {
-            switch (command) // TODO - Dávid
+            switch (command) // TODO
             {
                 case Command.Search:
-                    return @"HELP: Querying elements";
+                    return "help: search | q\n" +
+                        "searching is done via the 'search [[query]]' command\n" +
+                        "looks for the first occurence of the supplied query,\n" +
+                        "run the command without any arguments and it shall return the whole library.";
                 case Command.Add:
-                    return @"HELP: Adding elements";
+                    return "help: add | a\n" +
+                           "adding books to the library is done via the 'add [[book_data]]' command\n" +
+                           "[bold]arguments:[/]\n" +
+                           "[[title]]:  string\n" +
+                           "[[author]]: string\n" +
+                           "[[genre]]:  string\n" +
+                           "[[year]]:   integer\n" +
+                           "[[url]]:    string\n" +
+                           "[gold1 bold]:warning: NOTE: this does not save the added book to disk, you still need to run the 'save' command.[/]";
                 case Command.Remove:
-                    return @"HELP: Removing elements";
+                    return "help: remove | r\n" +
+                           "removing books from the library is done via the 'remove [[book_name]]' command\n" +
+                           "it functions similarly to search, in the sense that it deletes the first occurrence\n" +
+                           "of a book that contains [[book_name]] in the title\n" +
+                           "[gold1 bold]:warning: NOTE: this does not save the added book to disk, you still need to run the 'save' command.[/]";
                 case Command.Exit:
-                    return @"HELP: Exit";
+                    return "help: exit\n" +
+                            "exits the program. same result can be achieved with CTRL+C.";
                 case Command.Save:
-                    return @"HELP: Save";
-                case Command.Help:
-                    return @"HELP: Help";
+                    return "help: save\n" +
+                           "saves the library into [[file]]" +
+                           "the file type should preferably be YAML.";
                 case Command.Unknown:
                     goto default;
                 default:
-                    return @"HELP: ";
+                    return "usage: konyvtar [[file]]\n" +
+                           "[underline]currently available list of commands:[/]\n" +
+                           "search   | q [[query]]\n" +
+                           "add      | a [[book_data]]\n" +
+                           "remove   | r [[book_name]]\n" +
+                           "exit\n" +
+                           "save\n" +
+                           "\n[bold]to learn more about a command, use [/]'help [[command]]'";
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Spectre.Console;
+using System.Text;
 using YamlDotNet.Serialization;
 
 namespace ProjektFeladat
@@ -88,6 +89,7 @@ namespace ProjektFeladat
             //Console.WriteLine(Output);
             // fájlba írás
             File.WriteAllText(path, Output.ToString());
+            AnsiConsole.MarkupLine($"[bold green]:check_mark_button: Successfully saved to '{path}'[/]");
         }
     }
     internal class KonyvManager

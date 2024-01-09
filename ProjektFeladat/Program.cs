@@ -6,9 +6,9 @@ using System.Net.Security;
 using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
 
-AnsiConsole.MarkupLine("[bold yellow]Welcome![/]");
-AnsiConsole.MarkupLine("[red]type 'exit' to exit.[/]");
+AnsiConsole.MarkupLine("[bold turquoise2]Welcome![/]");
 AnsiConsole.MarkupLine("[bold]type 'help' for all the commands[/]");
+AnsiConsole.MarkupLine("[red]type 'exit' to exit.[/]");
 KonyvReader kr = new(args[0]);
 List<Konyv> Books = kr.LoadBooks();
 
@@ -38,7 +38,7 @@ while (true)
             break;
 
         case Command.Remove:
-            if (!(Splits.Length >= 2)) return; // Sanity check for an argument
+            if (Splits.Length <= 1) goto case Command.Help;
 
             string BookName =   string.Join(" ", Splits[1..]);
             var Match =         Books.Find(new Predicate<Konyv>(book => book.title.Contains(BookName)));
@@ -47,7 +47,8 @@ while (true)
             break;
 
         case Command.Save:
-            KonyvWriter kw = new("konyves.yaml");
+            if (Splits.Length <= 1) goto case Command.Help;
+            KonyvWriter kw = new(Splits[1]);
             kw.SaveBooks(Books);
             break;
 
@@ -58,7 +59,10 @@ while (true)
         case Command.Help:
             if (Splits.Length >= 2)
             {
-                Console.WriteLine(Cmd.Help(Cmd.ConvertCmd(Splits[1])));
+                AnsiConsole.MarkupLine(Cmd.Help(Cmd.ConvertCmd(Splits[1])));
+            } else
+            {
+                AnsiConsole.MarkupLine(Cmd.Help(Command.Unknown));
             }
             break;
 
