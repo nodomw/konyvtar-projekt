@@ -18,6 +18,7 @@ namespace ProjektFeladat
         Remove, //      Eltávolítás
         Exit, //        Kilépés
         Save, //        Mentés
+        Load, //        (Be)töltés
         Help, //        Súgó
         Unknown //      Ismeretlen => nem implementált
     };
@@ -33,6 +34,7 @@ namespace ProjektFeladat
             else if (command == "exit") return Command.Exit;
             else if (command == "save") return Command.Save;
             else if (command == "help") return Command.Help;
+            else if (command == "load") return Command.Load;
             else return Command.Unknown;
         }
         internal void Search(string query, List<Konyv> Books)

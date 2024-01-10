@@ -45,7 +45,7 @@ namespace ProjektFeladat
             }
             catch (Exception e)
             {
-                throw new Exception("konyvek [file]", e);
+                throw e;
             }
 
             // YAML deszeriálizáló létrehozása, és a beolvasott lista deszerializálása
@@ -75,7 +75,7 @@ namespace ProjektFeladat
             }
             catch (Exception e)
             {
-                throw new Exception("konyvek [file]", e);
+                throw e;
             }
             // YAML szerializáló létrehozása, és a beolvasott lista szerializálása
             var Serializer = new SerializerBuilder().Build();

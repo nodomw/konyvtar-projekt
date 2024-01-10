@@ -28,17 +28,26 @@ while (true)
         case Command.Add:
             if (Splits.Length <= 1) goto case Command.Help;
             Konyv book = new();
-            book.title = Splits[1];
-            book.author = Splits[2];
-            book.genre = Splits[3];
-            book.year = Int32.Parse(Splits[4]);
-            book.url = Splits[5];
+            try
+            {
+                book.title = Splits[1];
+                book.author = Splits[2];
+                book.genre = Splits[3];
+                book.year = Int32.Parse(Splits[4]);
+                book.url = Splits[5];
+
+            }
+            catch (Exception e)
+            {
+                AnsiConsole.MarkupLine($"[bold red1]invalid data, {e.Message}[/]");
+                break;
+            }
 
             k.AddBook(book, Books);
             break;
 
         case Command.Remove:
-            if (Splits.Length <= 1) goto case Command.Help;
+            if (Splits.Length <= 1) break;
 
             string BookName = string.Join(" ", Splits[1..]);
             var Match = Books.Find(new Predicate<Konyv>(book => book.title.Contains(BookName)));
@@ -64,6 +73,21 @@ while (true)
             else
             {
                 AnsiConsole.MarkupLine(Cmd.Help(Command.Unknown));
+            }
+            break;
+        case Command.Load:
+            if (Splits.Length >= 2)
+            {
+                try
+                {
+                    Books = new KonyvReader(Splits[1]).LoadBooks();
+                    AnsiConsole.MarkupLine($"[bold darkorange]'{Splits[1]}' has been reloaded[/]");
+                }
+                catch (Exception e)
+                {
+                    AnsiConsole.MarkupLine($"[bold red]failed to load library '{Splits[1]}'[/]");
+                    AnsiConsole.MarkupLine($"[bold red]{e.Message}[/]");
+                }
             }
             break;
 
